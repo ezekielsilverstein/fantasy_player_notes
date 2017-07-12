@@ -12,9 +12,11 @@
   <tbody>
     <% @notes.each do |note| %>
       <tr>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= note.created_at.strftime("%m-%d-%Y") %>
+        <td><%= note.subject %>
+        <td><%= link_to 'Show', player_note_path(note.player, note) %></td>
+        <td><%= link_to 'Edit', edit_player_note_path(note.player, note) %></td>
+        <td><%= link_to 'Destroy', [note.player, note], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +24,5 @@
 
 <br>
 
-<%= link_to 'New Note', new_note_path %>
+<p><%= link_to 'New Note', new_player_note_path %></p>
+<p><%= link_to 'Return to Players', players_path %></p>

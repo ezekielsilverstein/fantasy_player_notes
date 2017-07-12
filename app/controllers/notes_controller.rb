@@ -1,5 +1,7 @@
 class NotesController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_player
 
   # GET /notes
   # GET /notes.json
@@ -25,10 +27,12 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @note.player = @player
+    # @note.user = current_user
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
+        format.html { redirect_to [@player, @note], notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to [@player, @note], notice: 'Note was successfully updated.' }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: 'Note was successfully destroyed.' }
+      format.html { redirect_to player_notes_url, notice: 'Note was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +71,12 @@ class NotesController < ApplicationController
       @note = Note.find(params[:id])
     end
 
+    def set_player
+      @player = Player.find(params[:player_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.fetch(:note, {})
+      params.fetch(:note, {}).permit(:subject, :body)
     end
 end

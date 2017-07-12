@@ -1,6 +1,6 @@
 <h1>Editing Note</h1>
 
-<%= render 'form', note: @note %>
+<%= render 'form', player: @player, note: @note %>
 
-<%= link_to 'Show', @note %> |
-<%= link_to 'Back', notes_path %>
+<%= link_to 'Show', [@player, @note] %> |
+<%= link_to 'Back', player_notes_path %>

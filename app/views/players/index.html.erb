@@ -9,9 +9,19 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody align="left">
     <% @players.each do |player| %>
       <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Team</th>
+        <th>Owner</th>
+      </tr>
+      <tr>
+        <td><%= player.name %></td>
+        <td><%= player.position %></td>
+        <td><%= player.team %></td>
+        <td><%= player.owner %></td>
         <td><%= link_to 'Show', player %></td>
         <td><%= link_to 'Edit', edit_player_path(player) %></td>
         <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -20,6 +30,6 @@
   </tbody>
 </table>
 
-<br>
+<br />
 
 <%= link_to 'New Player', new_player_path %>
