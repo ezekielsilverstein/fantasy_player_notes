@@ -1,0 +1,31 @@
+<%= form_with(model: player, local: true) do |form| %>
+  <% if player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
+
+      <ul>
+      <% player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+
+    <%= form.label :position %>
+    <% positions = [["QB"], ["RB"], ["WR"], ["TE"], ["K"], ["D/ST"]] %>
+    <%= form.select(:position, positions, {}, {:multiple => false}) %>
+
+    <%= form.label :team %>
+    <% teams = [["ARI"], ["ATL"], ["BAL"], ["BUF"], ["CAR"], ["CHI"], ["CIN"], ["CLE"], ["DAL"], ["DEN"], ["DET"], ["GB"], ["HOU"], ["IND"], ["JAX"], ["KC"], ["MIA"], ["MIN"], ["NE"], ["NO"], ["NYG"], ["NYJ"], ["OAK"], ["PHI"], ["PIT"], ["SD"], ["SEA"], ["SF"], ["STL"], ["TB"], ["TEN"], ["WAS"]] %>
+    <%= form.select(:team, teams, {}, {:multiple => false}) %>
+
+    <%= form.label :owner %>
+    <%= form.text_field :owner %>
+
+    <%= form.submit %>
+  </div>
+<% end %>
