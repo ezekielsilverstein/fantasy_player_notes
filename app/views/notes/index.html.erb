@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Notes</h1>
+<% header = @player.name + ' Player Notes' %>
+<h1><%= header %></h1>
 
 <table>
   <thead>
@@ -10,14 +11,20 @@
   </thead>
 
   <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.created_at.strftime("%m-%d-%Y") %>
-        <td><%= note.subject %>
-        <td><%= link_to 'Show', player_note_path(note.player, note) %></td>
-        <td><%= link_to 'Edit', edit_player_note_path(note.player, note) %></td>
-        <td><%= link_to 'Destroy', [note.player, note], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><strong>Date</strong></td>
+      <td><strong>Subject</strong></td>
+    </tr>
+    <% @notes.order("created_at DESC").each do |note| %>
+      <% if note.player_id == @player.id %>
+        <tr>
+          <td><%= note.created_at.strftime("%m-%d-%Y") %>
+          <td><%= note.subject %>
+          <td><%= link_to 'Show', player_note_path(note.player, note) %></td>
+          <td><%= link_to 'Edit', edit_player_note_path(note.player, note) %></td>
+          <td><%= link_to 'Destroy', [note.player, note], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -25,4 +32,4 @@
 <br>
 
 <p><%= link_to 'New Note', new_player_note_path %></p>
-<p><%= link_to 'Return to Players', players_path %></p>
+<p><%= link_to 'Return to Player Page', player_path(@player) %></p>
