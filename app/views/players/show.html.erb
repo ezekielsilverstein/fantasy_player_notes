@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%=@player.name%></h1>
+<h2><%=@player.position%></h2>
+<h2><%=@player.team%></h2>
+<h2><%=@player.owner%></h2>
+
+<p><%= link_to 'View Notes', player_notes_path(@player) %></p>
+
+<p><%= link_to 'New Note', new_player_note_path(@player) %></p>
+
+<p><%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Return to Player List', players_path %>
+</p>

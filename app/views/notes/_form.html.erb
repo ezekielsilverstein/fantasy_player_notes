@@ -1,0 +1,23 @@
+<%= form_with(model: [player, note], local: true) do |form| %>
+  <% if note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.label :subject %>
+    <%= form.text_field :subject, size: "30x1" %>
+
+    <%= form.label :body %>
+    <%= form.text_area :body , size: "30x10" %>
+
+    <%= form.submit %>
+  </div>
+<% end %>

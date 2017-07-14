@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @note.subject%></h1>
+
+<body>
+    <p><%= @note.created_at.strftime('%m-%d-%Y') %></p>
+    <p><%= @note.body %></p>
+</body>
+
+<br />
+<br />
+
+<footer>
+    <%= link_to 'Edit', edit_player_note_path(@note) %> |
+    <%= link_to 'Back', player_notes_path %>
+</footer>
+
+
